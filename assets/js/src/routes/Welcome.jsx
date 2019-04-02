@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login } from '../../api';
 import globalStrings from '../../strings';
 
 
@@ -25,11 +24,11 @@ const Welcome = ({updateField, login, password, email}) => (
       <p className="welcome__header">{strings.header}</p>
       <p className="welcome__support">{strings.support}</p>
       <div className="welcome__links">
-        <a className="welcome__login" href="#">
+        <Link className="welcome__login" to="/login">
           <img className="welcome__login-meme" src="https://cdn3.iconfinder.com/data/icons/popular-memes/48/JD-02-512.png" />
           {strings.login}
-        </a>
-        <a className="welcome__register" href="#">{strings.register}</a>
+        </Link>
+        <Link className="welcome__register" to="/register">{strings.register}</Link>
       </div>
     </div>
     <div className="welcome__disclaimers">

@@ -68,6 +68,10 @@ main {
   color: white;
   position: relative;
 
+  &__left {
+    width: 55%;
+  }
+
   &__app {
     display: flex;
     padding-top: 100px;
@@ -110,7 +114,6 @@ main {
   &__support {
     font-size: 2rem;
     color: white;
-    width: 50%;
     margin-top: 15px;
   }
 
@@ -164,6 +167,22 @@ main {
     align-self: center;
     right: 0;
     top: 25%;
+    position: absolute;
+  }
+
+  &__doggo {
+    width: 570px;
+    align-self: center;
+    right: 0;
+    top: 5%;
+    position: absolute;
+  }
+
+  &__yao {
+    width: 500px;
+    align-self: center;
+    right: 0;
+    top: 5%;
     position: absolute;
   }
 }
@@ -693,27 +712,22 @@ footer {
   &__login {
     display: flex;
     flex-wrap: wrap;
-
-    margin: 75px auto 25px;
-    width: 50%;
-    background-color: white;
-    border-radius: 10px;
-    padding: 35px 25px 45px;
+    padding-top: 165px;
   }
 
   &__sign {
     flex-basis: 100%;
-    text-align: center;
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 600;
     margin-bottom: 0;
+    text-transform: uppercase;
   }
 
   &__personal {
     flex-basis: 100%;
-    text-align: center;
-    font-size: 1.3rem;
-
+    font-size: 1.75rem;
+    margin-top: 15px;
+    margin-bottom: 25px;
   }
 
   form {
@@ -723,11 +737,18 @@ footer {
   }
 
   &__input {
-    flex-basis: 80%;
-    margin: 1% 10%;
+    flex-basis: 90%;
+    margin: 1% 0;
     padding: 10px 10px;
     border-radius: 4px;
-    border: 2px solid $gray;
+    border: 2px solid #529bf5;
+    background: linear-gradient(110deg, #6e6fef 0%, #529bf5 100%);
+    font-weight: 800;
+    color: white;
+  }
+  
+  &__input::placeholder {
+    color: white;
   }
 
   &__input-reg {
@@ -738,16 +759,36 @@ footer {
     border: 2px solid $gray;
   }
 
+  &__butons {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    margin-top: 25px !important;
+  }
+
   &__btn {
-    margin-left: 75.4%;
-    margin-top: 25px;
-    width: 100px;
+    background-color: #03a009 !important;
+    border-color: #6284f1 !important;
+    color: black;
+    font-weight: 800;
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 0;
+    box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.3);
   }
 
   &__create {
-    margin-left: 10%;
-    margin-top: -33px;
-    color: $accent;
+    @extend .buton;
+
+    background-color: rgba(255,255,255,0.3);
+    color: white;
+    font-weight: 800;
+    height: 44px;
+    display: block;
+    display: flex;
+    align-items: center;
   }
 }
 
