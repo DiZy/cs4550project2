@@ -65,8 +65,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :project2, Project2.Repo,
-  username: "david",
-  password: "davidpass",
+  username: "postgres",
+  password: "postgres",
   database: "project2_dev",
   hostname: "localhost",
   pool_size: 10

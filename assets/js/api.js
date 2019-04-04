@@ -3,14 +3,14 @@ const config = {
   headers: {'Content-Type': 'application/json'},
 }
 
-const login = (email, pass) => new Request("/taskify-api//token", Object.assign({},
+const login = (email, password) => new Request("/api/auth", Object.assign({},
   config, 
-  {body: JSON.stringify({email, pass}) }
+  {body: JSON.stringify({email, password}) }
 ));
 
-const register = (email, name, password) => new Request("/taskify-api//users", Object.assign({},
+const register = (email, password) => new Request("/api/users", Object.assign({},
   config, 
-  {body: JSON.stringify({user: {email, name, password}}) }
+  {body: JSON.stringify({user: {email, password}})}
 ));
 
 export {

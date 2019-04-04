@@ -29,10 +29,9 @@ defmodule Project2Web.Router do
     resources "/users", UserController, except: [:new, :edit]
     resources "/auth", SessionController, only: [:create, :delete]
 
-    get "/collectedmemes", MemeFoundController, :index
+    get "/mymemes", MemeFoundController, :index
     get "/memesnearby", ActiveMemeController, :index
     post "/addmeme", MemeController, :addmeme
     get "/getgifs", MemeController, :getgifs
-    post "/collectmeme", MemeFoundController, :create
   end
 end

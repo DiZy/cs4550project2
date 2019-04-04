@@ -16,11 +16,12 @@ const mapDispatchToProps = (dispatch, { history }) => ({
 
     return dispatch({type: 'UPDATE_FORM', data})
   },
-  register: (email, name, password) => {
-    fetch(register(email, name, password))
+  register: (email, password) => {
+    fetch(register(email, password))
       .then(resp => resp.json())
       .then(json => {
         alert("Successfully registered! You can now log in.");
+        console.log(json.data);
         dispatch({
           type: 'ADD_USER',
           user: json.data,
@@ -47,7 +48,7 @@ const Register = ({updateField, register, name, password, email}) => (
             type="password" name="password" placeholder="Password (at least 8 characters)" />
          <div className="login__butons">
           <Link to="/" className="login__create">Back</Link>
-          <button onClick={() => register(email, name, password)} className="login__btn btn btn-primary">Register</button>
+          <button onClick={() => register(email, password)} className="login__btn btn btn-primary">Register</button>
          </div>
       </div>
     </div>

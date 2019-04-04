@@ -37,7 +37,7 @@ class MemeMonGoApp extends Component {
     const { token } = this.props;
     return (
       <Router>
-        {token ? this.renderRegistrationRoutes() : this.renderRoutes()}
+        {token ? this.renderRoutes() : this.renderRegistrationRoutes()}
       </Router>
     )
   }
