@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { login } from '../../api';
 import globalStrings from '../../strings';
 const strings = globalStrings.en.welcome;
 
 
 const mapStateToProps = state => Object.assign({}, state.login);
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, { history }) => ({
   updateField: (fieldName) => (e) => {
     let data = {};
     data[fieldName] = e.target.value;
@@ -17,12 +17,15 @@ const mapDispatchToProps = dispatch => ({
   login: (email, pass) => {
     fetch(login(email, pass))
       .then(res => res.json())
-      .then(json => dispatch({
-        type: 'SET_TOKEN',
-        token: json
-      })).catch(err => {
+      .then(json => {
+        dispatch({
+          type: 'SET_TOKEN',
+          token: json
+        })
+        history.push('/');
+      }).catch(err => {
         alert("Could not log in. Please try again.");
-        console.err(err);
+        console.log(err);
       });
   }
 });
@@ -52,4 +55,4 @@ const Login = ({updateField, login, password, email}) => (
   </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

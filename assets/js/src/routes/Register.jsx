@@ -21,15 +21,10 @@ const mapDispatchToProps = (dispatch, { history }) => ({
       .then(resp => resp.json())
       .then(json => {
         alert("Successfully registered! You can now log in.");
-        console.log(json.data);
-        dispatch({
-          type: 'ADD_USER',
-          user: json.data,
-        });
         history.push('/');
       }).catch(err => {
         alert("Failed to register. Please try again.");
-        console.err(err);
+        console.log(err);
       })
   }
 })

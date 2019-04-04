@@ -56,7 +56,12 @@ const form = (state = INIT_FORM, action) => {
   }
 }
 
-const token = (state = null, action) =>{
+let initToken = null;
+if (window.userToken) {
+  initToken = window.userToken
+}
+
+const token = (state = initToken, action) =>{
   switch (action.type) {
     case 'SET_TOKEN':
       return action.token;
@@ -94,7 +99,7 @@ const reducers = (state, action) => {
   return deepFreeze(reducer(state, action));
 };
 
-let store = createStore(reducers,
+let store = createStore(reducers, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
