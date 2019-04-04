@@ -7,6 +7,7 @@ defmodule Project2.ActiveMemes do
   alias Project2.Repo
 
   alias Project2.ActiveMemes.ActiveMeme
+  alias Project2.UserCreatedMemes.UserCreatedMeme
 
   @doc """
   Returns the list of activememes.

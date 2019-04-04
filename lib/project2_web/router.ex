@@ -31,5 +31,7 @@ defmodule Project2Web.Router do
 
     get "/mymemes", MemeFoundController, :index
     get "/memesnearby", ActiveMemeController, :index
+    post "/addmeme", MemeController, :addmeme
+    get "/getgifs", MemeController, :getgifs
   end
 end
