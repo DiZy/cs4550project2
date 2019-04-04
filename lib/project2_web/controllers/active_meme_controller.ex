@@ -8,8 +8,10 @@ defmodule Project2Web.ActiveMemeController do
 
   def index(conn, _params) do
     activememes = ActiveMemes.list_activememes()
-    
-    render(conn, "index.json", activememes: activememes)
+
+    conn
+    |> put_resp_header("content-type", "application/json; charset=utf-8")
+    |> send_resp(:created, Jason.encode!(%{memes: activememes}))
   end
 
   def create(conn, %{"active_meme" => active_meme_params}) do
