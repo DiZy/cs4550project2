@@ -1,19 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import globalStrings from '../../strings';
 
 const strings = globalStrings.en.menu;
 
-const Menu = (props) => (
+const mapStateToProps = state => Object.assign({}, state.modals);
+
+const mapDispatchToProps = dispatch => ({
+  openMemeModal: e => dispatch({type: 'UPDATE_MODAL_STATE', data: {createMemeModal: true}}),
+  openProfileModal: e => dispatch({type: 'UPDATE_MODAL_STATE', data: {profileModal: true}}),
+});
+
+const Menu = ({createMemeModal, profileModal, openMemeModal, openProfileModal}) => (
   <nav className="menu">
-    <ul className="menu__content">
-      <li>
-        <img className="menu__entry-img" src="https://ichef.bbci.co.uk/news/660/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg"/>
-        <p className="menu__entry-text">{strings.profile}</p>
-      </li>
-      <li className="menu__cta">{strings.place}</li>
-      <li>{strings.logout}</li>
-    </ul>
+    <div className="menu__profile" onClick={openProfileModal}>
+      <img className="menu__profile-img" src="http://www.stickpng.com/assets/images/5845ca7c1046ab543d25238b.png"/>
+    </div>
+    <div className="menu__create-meme" onClick={openMemeModal}>
+      <img className="menu__create-img" src="https://image.flaticon.com/icons/svg/60/60785.svg"/>
+      {strings.place}
+    </div>
+    <div className="menu__logout">
+      <img className="menu__logout-img" src="https://image.flaticon.com/icons/svg/149/149409.svg"/>
+      {strings.logout}
+    </div>
+    <div className="menu__dankness">
+      <marquee>This app is developed by Cristi Dragomir & David Zilburg</marquee>
+    </div>
   </nav>
 );
 
-export default Menu;
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

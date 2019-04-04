@@ -11,16 +11,27 @@ defmodule Project2Web.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug Project2.Plugs.FetchSession
   end
 
   scope "/", Project2Web do
     pipe_through :browser
 
     get "/", PageController, :index
+    
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Project2Web do
-  #   pipe_through :api
-  # end
+  scope "/api", Project2Web do
+    pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/auth", SessionController, only: [:create, :delete]
+
+    get "/mymemes", MemeFoundController, :index
+    get "/memesnearby", ActiveMemeController, :index
+    post "/addmeme", MemeController, :addmeme
+    get "/getgifs", MemeController, :getgifs
+  end
 end

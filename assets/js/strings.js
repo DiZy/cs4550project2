@@ -2,7 +2,7 @@ export default {
   'en': {
     'menu': {
       'profile': 'Profile',
-      'place': 'Plant meme',
+      'place': 'Create Meme',
       'logout': 'Log out'
     },
     'welcome': {

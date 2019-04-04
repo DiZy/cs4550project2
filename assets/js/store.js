@@ -12,6 +12,24 @@ const INIT_FORM = {
   time_spent: 0,
 };
 
+const modals = (state = {createMemeModal: false, profileModal: false}, action) => {
+  switch (action.type) {
+    case 'UPDATE_MODAL_STATE':
+      return Object.assign({}, state, action.data)
+    default:
+      return state;
+  }
+}
+
+const position = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_POSITION':
+      return Object.assign({}, state, action.data);
+    default: 
+      return state;
+  }
+}
+
 const form = (state = INIT_FORM, action) => {
   switch (action.type) {
     case 'UPDATE_FORM':
@@ -72,7 +90,7 @@ const login = (state = {email: "",pass: ""}, action) => {
 }
 
 const reducers = (state, action) => {
-  let reducer = combineReducers({form, token, login, register});
+  let reducer = combineReducers({form, token, login, register, position, modals});
   return deepFreeze(reducer(state, action));
 };
 
