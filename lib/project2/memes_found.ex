@@ -25,13 +25,14 @@ defmodule Project2.MemesFound do
   def memes_for_user(user_id) do
     user_created_query = from mf in MemeFound, 
       join: m in UserCreatedMeme,
-      where: mf.user_id == ^user_id and mf.is_used_created == true and mf.meme_id == m.id
+      where: mf.user_id == ^user_id and mf.is_used_created == true and mf.meme_id == m.id,
+      select: %{meme: mf, data: m}
 
     user_created = Repo.all(user_created_query)
 
     from_api_query = from mf in MemeFound,
       join: m in UserCreatedMeme,
-      where: mf.user_id == ^user_id and mf.user_created == false
+      where: mf.user_id == ^user_id and mf.is_used_created == false
 
     from_api = Repo.all(from_api_query)
 
@@ -50,7 +51,10 @@ defmodule Project2.MemesFound do
     meme_data = Jason.decode!(resp.body)
 
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
-      Map.put(from_db, "url", from_api["embed_url"])
+      %{
+        meme: from_db,
+        url: from_api["embed_url"]
+      }
     end
 
     user_created ++ memes

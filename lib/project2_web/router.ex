@@ -30,5 +30,6 @@ defmodule Project2Web.Router do
     resources "/auth", SessionController, only: [:create, :delete]
 
     get "/mymemes", MemeFoundController, :index
+    get "/memesnearby", ActiveMemeController, :index
   end
 end
