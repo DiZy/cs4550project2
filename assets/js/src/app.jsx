@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Header, Menu } from './components/'
-import { Login, Register, Welcome } from './routes/';
+import { Login, Register, Welcome, Dashboard } from './routes/';
 
 const mapStateToProps = state => ({
   token: state.token
@@ -27,7 +27,8 @@ class MemeMonGoApp extends Component {
   renderRoutes() {
     return (
       <Fragment>
-        <Route path="/" exact={true} render={() => <div> Hi </div>} />
+        <Route path="/" exact={true} render={() => <Dashboard />} />
+        <Menu />
       </Fragment>
     )
   }
@@ -36,7 +37,7 @@ class MemeMonGoApp extends Component {
     const { token } = this.props;
     return (
       <Router>
-        {token ? this.renderRoutes() : this.renderRegistrationRoutes()}
+        {token ? this.renderRegistrationRoutes() : this.renderRoutes()}
       </Router>
     )
   }
