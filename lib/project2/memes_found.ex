@@ -35,15 +35,15 @@ defmodule Project2.MemesFound do
 
     from_api = Repo.all(from_api_query)
 
-    from_api_ids_only = Enum.map(from_api, fn mf -> mf.id end)
+    from_api_gif_ids_only = Enum.map(from_api, fn mf -> mf.gif_id end)
 
-    from_api_ids_only_str = Enum.join(from_api_ids_only, ",")
+    from_api_gif_ids_only_str = Enum.join(from_api_gif_ids_only, ",")
 
     api_key = "jnxtU2q5cYGQI5KYbxSMCj5bHRJ46qaU"
 
     url = "https://api.giphy.com/v1/gifs"
     headers = []
-    params = [api_key: api_key, ids: from_api_ids_only_str]
+    params = [api_key: api_key, ids: from_api_gif_ids_only_str]
 
     resp = HTTPoison.get!(url, headers, params: params)
 
@@ -52,7 +52,7 @@ defmodule Project2.MemesFound do
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
       Map.put(from_db, "url", from_api["embed_url"])
     end
-    
+
     user_created ++ memes
   end
 
