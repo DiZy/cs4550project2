@@ -7,9 +7,9 @@ defmodule Project2Web.MemeFoundController do
   action_fallback Project2Web.FallbackController
 
   # My Memes
-  def index(conn, _params) do
-    memesfound = MemesFound.list_memesfound()
-    render(conn, "index.json", memesfound: memesfound)
+  def index(conn, %{"user_id" => user_id}) do
+    memes = MemesFound.memes_for_user(user_id)
+    render(conn, "index.json", memes: memes)
   end
 
   def create(conn, %{"meme_found" => meme_found_params}) do
