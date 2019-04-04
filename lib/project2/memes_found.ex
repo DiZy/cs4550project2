@@ -30,6 +30,16 @@ defmodule Project2.MemesFound do
 
     user_created = Repo.all(user_created_query)
 
+    user_created = Enum.map(user_created, fn m -> %{
+      is_user_created: true,
+      lat: m.meme.lat,
+      long: m.meme.long,
+      meme_id: m.data.id,
+      image_url: m.data.image_url,
+      text_line_one: m.data.text_line_one,
+      text_line_two: m.data.text_line_two,
+    } end)
+
     from_api_query = from mf in MemeFound,
       join: m in UserCreatedMeme,
       where: mf.user_id == ^user_id and mf.is_used_created == false
@@ -52,7 +62,10 @@ defmodule Project2.MemesFound do
 
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
       %{
-        meme: from_db,
+        is_user_created: false,
+        lat: from_db.lat,
+        long: from_db.long,
+        gif_id: from_db.gif_id,
         url: from_api["embed_url"]
       }
     end

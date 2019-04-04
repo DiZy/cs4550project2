@@ -11,7 +11,7 @@ defmodule Project2Web.ActiveMemeController do
 
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")
-    |> send_resp(:created, Jason.encode!(%{memes: activememes}))
+    |> send_resp(:created, Poison.encode!(%{memes: activememes}))
   end
 
   def create(conn, %{"active_meme" => active_meme_params}) do

@@ -11,7 +11,7 @@ defmodule Project2Web.MemeFoundController do
     memes = MemesFound.memes_for_user(user_id)
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")
-    |> send_resp(:created, Jason.encode!(%{memes: memes}))
+    |> send_resp(:created, Poison.encode!(%{memes: memes}))
   end
 
   def create(conn, %{"meme_found" => meme_found_params}) do
