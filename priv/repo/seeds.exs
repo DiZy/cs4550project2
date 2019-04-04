@@ -12,6 +12,8 @@
 alias Project2.Repo
 alias Project2.Users.User
 alias Project2.MemesFound.MemeFound
+alias Project2.UserCreatedMemes.UserCreatedMeme
+alias Project2.ActiveMemes.ActiveMeme
 
 pwhash = Argon2.hash_pwd_salt("pass1")
 
