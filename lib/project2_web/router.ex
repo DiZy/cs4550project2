@@ -26,6 +26,7 @@ defmodule Project2Web.Router do
   scope "/api", Project2Web do
     pipe_through :api
 
+    resources "/users", UserController, except: [:new, :edit]
     resources "/auth", SessionController, only: [:create, :delete]
   end
 end

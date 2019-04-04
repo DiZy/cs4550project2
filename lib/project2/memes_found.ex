@@ -7,6 +7,7 @@ defmodule Project2.MemesFound do
   alias Project2.Repo
 
   alias Project2.MemesFound.MemeFound
+  alias Project2.UserCreatedMemes.UserCreatedMeme
 
   @doc """
   Returns the list of memesfound.
@@ -19,6 +20,26 @@ defmodule Project2.MemesFound do
   """
   def list_memesfound do
     Repo.all(MemeFound)
+  end
+
+  def memes_for_user(user_id) do
+    user_created_query = from mf in MemeFound, 
+      join: m in UserCreatedMeme,
+      where: mf.user_id == ^user_id and mf.is_used_created == true and mf.meme_id == m.id
+
+    user_created = Repo.all(user_created_query)
+
+    from_api_query = from mf in MemeFound,
+      join: m in UserCreatedMeme,
+      where: mf.user_id == ^user_id and mf.user_created == false
+
+    from_api = Repo.all(from_api_query)
+
+    from_api_ids_only = Enum.map(from_api, fn mf -> mf.id end)
+
+    # TODO: query to api and combine results
+
+    user_created
   end
 
   @doc """

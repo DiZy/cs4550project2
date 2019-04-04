@@ -22,7 +22,7 @@ defmodule Project2Web.UserController do
       resp = %{
         data: %{
           user_token: token,
-          user_id: user.id,
+          user_id: user.id, 
         }
       }
       conn
