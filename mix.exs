@@ -42,6 +42,7 @@ defmodule Project2.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:httpoison, "~> 1.5"},
+      {:poison, "~> 3.1"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.1"},

@@ -21,14 +21,24 @@ defmodule Project2.ActiveMemes do
   def list_activememes do
     user_created_query = from mf in ActiveMeme, 
       join: m in UserCreatedMeme,
-      where: mf.is_used_created == true and mf.meme_id == m.id,
+      where: mf.is_user_created == true and mf.meme_id == m.id,
       select: %{meme: mf, data: m}
 
     user_created = Repo.all(user_created_query)
 
+    user_created = Enum.map(user_created, fn m -> %{
+      is_user_created: true,
+      lat: m.meme.lat,
+      long: m.meme.long,
+      meme_id: m.data.id,
+      image_url: m.data.image_url,
+      text_line_one: m.data.text_line_one,
+      text_line_two: m.data.text_line_two,
+    } end)
+
     from_api_query = from mf in ActiveMeme,
       join: m in UserCreatedMeme,
-      where: mf.is_used_created == false
+      where: mf.is_user_created == false
 
     from_api = Repo.all(from_api_query)
 
@@ -44,11 +54,14 @@ defmodule Project2.ActiveMemes do
 
     resp = HTTPoison.get!(url, headers, params: params)
 
-    meme_data = Jason.decode!(resp.body)
+    meme_data = Jason.decode!(resp.body)["data"]
 
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
       %{
-        meme: from_db,
+        is_user_created: false,
+        lat: from_db.lat,
+        long: from_db.long,
+        gif_id: from_db.gif_id,
         url: from_api["embed_url"]
       }
     end
