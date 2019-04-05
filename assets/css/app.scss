@@ -861,3 +861,76 @@ footer {
   }
 }
 
+.createMemeForm {
+
+  .tab-header {
+    display: flex;
+    align-items: left;
+    flex-direction: row;
+    height: 50px;
+    width: 100%;
+
+    .tab {
+      flex: 1;
+      color: black;
+      font-size: 24px;
+    }
+  
+    .active-tab, .tab:hover{
+      color: $red;
+      border-bottom: 5px solid $red;
+    }
+  }
+
+  .template-selector {
+    height: 50px;
+    width: 100%;
+    overflow-y: none;
+    overflow-x: scroll;
+    
+    &-template {
+      padding: 5px;
+      width: 50px;
+      height: 50px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.meme-viewer {
+  height: 200px;
+  width: 200px;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+
+  .text-line-one, .text-line-two {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
+
+  .text-line-one {
+    top: 5px;
+  }
+
+  .text-line-two {
+    bottom: 5px;
+  }
+
+  .giphy-memes {
+    img {
+      width: 50px;
+      padding: 5px;
+    }
+  }
+}
+

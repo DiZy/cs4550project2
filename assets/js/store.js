@@ -99,12 +99,34 @@ const memes = (state = [], action) => {
     case 'ADD_MEMES':
       return [...state, ...action.data]
     default:
-      return state
+      return state;
   }
 }
 
+const createMemeFormDefaultState = {
+  isUserCreated: true, 
+  textLineOne: "", 
+  textLineTwo: "",
+  imageURL: "",
+  gifId: "",
+  gifUrl: "",
+  gifsAvailable: [],
+}
+
+const createMemeForm = (state = createMemeFormDefaultState, action) => {
+  switch(action.type) {
+    case "UPDATE_CREATE_MEME_FORM":
+      console.log(action.data);
+      return Object.assign({}, state, action.data)
+    case "CLEAR_CREATE_MEME_FORM":
+      return createMemeFormDefaultState;
+    default:
+      return state;
+  }
+};
+
 const reducers = (state, action) => {
-  let reducer = combineReducers({form, token, memes, login, register, position, modals});
+  let reducer = combineReducers({form, token, login, register, position, modals, memes, createMemeForm});
   return deepFreeze(reducer(state, action));
 };
 
