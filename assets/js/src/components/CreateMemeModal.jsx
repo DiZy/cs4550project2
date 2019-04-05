@@ -77,7 +77,7 @@ class CreateMemeModal extends React.Component {
             long: this.props.position.longitude,
         }))
         .then(resp => resp.json())
-        .then(json => {
+        .then(_json => {
             this.props.clearForm();
         }).catch(err => {
             alert("Failed to upload meme. Please try again.");

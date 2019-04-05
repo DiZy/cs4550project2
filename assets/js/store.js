@@ -94,14 +94,15 @@ const login = (state = {email: "",pass: ""}, action) => {
   }
 }
 
-<<<<<<< Updated upstream
 const memes = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MEMES':
       return [...state, ...action.data]
     default:
-      return state
-=======
+      return state;
+  }
+}
+
 const createMemeFormDefaultState = {
   isUserCreated: true, 
   textLineOne: "", 
@@ -121,16 +122,11 @@ const createMemeForm = (state = createMemeFormDefaultState, action) => {
       return createMemeFormDefaultState;
     default:
       return state;
->>>>>>> Stashed changes
   }
-}
+};
 
 const reducers = (state, action) => {
-<<<<<<< Updated upstream
-  let reducer = combineReducers({form, token, memes, login, register, position, modals});
-=======
-  let reducer = combineReducers({form, token, login, register, position, modals, createMemeForm});
->>>>>>> Stashed changes
+  let reducer = combineReducers({form, token, login, register, position, modals, memes, createMemeForm});
   return deepFreeze(reducer(state, action));
 };
 
