@@ -13,7 +13,15 @@ const register = (email, password) => new Request("/api/users", Object.assign({}
   {body: JSON.stringify({user: {email, password}})}
 ));
 
+const getNearbyMemes = () => new Request("/api/memesnearby", Object.assign({},
+  config,
+  {
+    method: 'GET'
+  }
+));
+
 export {
   login,
   register,
+  getNearbyMemes
 }

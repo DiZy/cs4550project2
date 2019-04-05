@@ -94,8 +94,17 @@ const login = (state = {email: "",pass: ""}, action) => {
   }
 }
 
+const memes = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_MEMES':
+      return [...state, ...action.data]
+    default:
+      return state
+  }
+}
+
 const reducers = (state, action) => {
-  let reducer = combineReducers({form, token, login, register, position, modals});
+  let reducer = combineReducers({form, token, memes, login, register, position, modals});
   return deepFreeze(reducer(state, action));
 };
 
