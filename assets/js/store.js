@@ -94,17 +94,43 @@ const login = (state = {email: "",pass: ""}, action) => {
   }
 }
 
+<<<<<<< Updated upstream
 const memes = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MEMES':
       return [...state, ...action.data]
     default:
       return state
+=======
+const createMemeFormDefaultState = {
+  isUserCreated: true, 
+  textLineOne: "", 
+  textLineTwo: "",
+  imageURL: "",
+  gifId: "",
+  gifUrl: "",
+  gifsAvailable: [],
+}
+
+const createMemeForm = (state = createMemeFormDefaultState, action) => {
+  switch(action.type) {
+    case "UPDATE_CREATE_MEME_FORM":
+      console.log(action.data);
+      return Object.assign({}, state, action.data)
+    case "CLEAR_CREATE_MEME_FORM":
+      return createMemeFormDefaultState;
+    default:
+      return state;
+>>>>>>> Stashed changes
   }
 }
 
 const reducers = (state, action) => {
+<<<<<<< Updated upstream
   let reducer = combineReducers({form, token, memes, login, register, position, modals});
+=======
+  let reducer = combineReducers({form, token, login, register, position, modals, createMemeForm});
+>>>>>>> Stashed changes
   return deepFreeze(reducer(state, action));
 };
 

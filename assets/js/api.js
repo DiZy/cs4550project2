@@ -13,6 +13,7 @@ const register = (email, password) => new Request("/api/users", Object.assign({}
   {body: JSON.stringify({user: {email, password}})}
 ));
 
+
 const getNearbyMemes = () => new Request("/api/memesnearby", Object.assign({},
   config,
   {
@@ -20,8 +21,22 @@ const getNearbyMemes = () => new Request("/api/memesnearby", Object.assign({},
   }
 ));
 
+const fetchGifs = () => new Request("/api/getgifs", Object.assign({},
+  {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  }
+));
+
+const uploadMeme = (body) => new Request("api/addmeme", Object.assign({},
+  config,
+  {body: JSON.stringify(body)}
+));
+
 export {
   login,
   register,
-  getNearbyMemes
+  getNearbyMemes,
+  fetchGifs,
+  uploadMeme,
 }

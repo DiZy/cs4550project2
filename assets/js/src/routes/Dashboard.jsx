@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import Modal from 'react-modal';
+import CreateMemeModal from "../components/CreateMemeModal";
 
 import { getNearbyMemes } from '../../api';
 
@@ -110,8 +111,9 @@ class Dashboard extends Component {
           isOpen={this.props.createMemeModal}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
-          contentLabel="Create Modal"
-        ></Modal>
+          contentLabel="Create Modal">
+          <CreateMemeModal closeModal={this.closeModal}/>
+        </Modal>
         <Modal
           isOpen={this.props.profileModal}
           onAfterOpen={this.afterOpenModal}
