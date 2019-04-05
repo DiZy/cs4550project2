@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
@@ -32,26 +33,73 @@ const mapDispatchToProps = (dispatch) => ({
 
 Modal.setAppElement('#root')
 
+function isCollide(a, b) {
+  var aRect = a.getBoundingClientRect();
+  var bRect = b.getBoundingClientRect();
+
+  return !(
+      ((aRect.top + aRect.height) < (bRect.top)) ||
+      (aRect.top > (bRect.top + bRect.height)) ||
+      ((aRect.left + aRect.width) < bRect.left) ||
+      (aRect.left > (bRect.left + bRect.width))
+  );
+}
+
 const PlayerMarker = (props) => (
   <div
     lat={props.lat}
     lng={props.lng}
   >
     <svg className="player-memeBoundary" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50"/>
+      <circle id="boundary" cx="50" cy="50" r="50"/>
     </svg>
     <img className="player-marker" src="https://i.pinimg.com/originals/f3/c7/3c/f3c73c8c0c0eaf908ed17cc2966c0777.png" />
   </div>
 );
 
-const MemeMarker = (props) => (
-  <div
-    lat={props.lat}
-    lng={props.lng}
-  >
-    <img className="meme-marker" src="https://image.flaticon.com/icons/svg/214/214305.svg" />
-  </div>
-);
+class MemeMarker extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false,
+      collected: false
+    }
+    this.myRef = React.createRef();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.clicked == false && this.state.clicked == true) {
+     setTimeout(() => {
+        this.setState({collected: true})
+      }, 3000)
+    }
+  }
+
+  handleClick(e) {
+    if (!this.state.clicked) {
+      const node = ReactDOM.findDOMNode(this).firstElementChild;
+      const boundary = document.querySelector('circle');
+
+      if (isCollide(node, boundary)) {
+        this.setState({clicked: true})
+      }
+    }
+  }
+  
+  render() {
+    return (
+      <div
+        lat={this.props.lat}
+        lng={this.props.lng}
+        onClick={this.handleClick}
+      >
+        <img className="meme-marker" src="https://image.flaticon.com/icons/svg/214/214305.svg" />
+        {this.state.clicked && !this.state.collected ? 'WHAT IS POPPIN' : null}
+      </div>
+    )
+  }
+}
 
 class Dashboard extends Component {
   getAndTrackLocation() {
