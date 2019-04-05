@@ -37,6 +37,9 @@ const PlayerMarker = (props) => (
     lat={props.lat}
     lng={props.lng}
   >
+    <svg className="player-memeBoundary" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="50"/>
+    </svg>
     <img className="player-marker" src="https://i.pinimg.com/originals/f3/c7/3c/f3c73c8c0c0eaf908ed17cc2966c0777.png" />
   </div>
 );
@@ -46,7 +49,7 @@ const MemeMarker = (props) => (
     lat={props.lat}
     lng={props.lng}
   >
-    <img className="player-marker" src="https://image.flaticon.com/icons/svg/214/214305.svg" />
+    <img className="meme-marker" src="https://image.flaticon.com/icons/svg/214/214305.svg" />
   </div>
 );
 

@@ -278,6 +278,20 @@ main {
 
 .player-marker {
   height: 50px;
+  position: relative;
+  z-index: 50;
+}
+
+.player-memeBoundary {
+  fill: rgba(red,0.2);
+  height: 300px;
+  position: absolute;
+  top: -116px;
+  left: -116px;
+}
+
+.meme-marker {
+  height: 30px;
 }
 
 footer {
