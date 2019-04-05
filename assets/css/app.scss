@@ -292,6 +292,8 @@ main {
 
 .meme-marker {
   height: 30px;
+  position: relative;
+  z-index: 10000;
 }
 
 footer {
