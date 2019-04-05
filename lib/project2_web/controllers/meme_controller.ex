@@ -25,24 +25,33 @@ defmodule Project2Web.MemeController do
         image_url: params["image_url"],
       }
 
-      {:ok, added_meme_id} = Repo.insert!(user_created_meme, returning: :id)
+      {:ok, added_meme} = Repo.insert(user_created_meme)
 
       meme = %MemeFound{
         user_id: user_id,
-        meme_id: added_meme_id,
+        meme_id: added_meme.id,
         is_user_created: true
       }
 
-      {:ok, _} = Repo.insert!(meme)
+      {:ok, _} = Repo.insert(meme)
 
       active_meme = %ActiveMeme{
         is_user_created: true,
         lat: params["lat"],
         long: params["long"],
-        meme_id: added_meme_id
+        meme_id: added_meme.id
       }
 
-      {:ok, _} = Repo.insert!(active_meme)
+      {:ok, active_meme} = Repo.insert(active_meme)
+
+      active_meme = %{
+        id: active_meme.id,
+        lat: active_meme.lat,
+        long: active_meme.long,
+        meme_id: active_meme.meme_id,
+        gif_id: active_meme.gif_id,
+        is_user_created: active_meme.is_user_created,
+      }
 
       resp = %{new_active_meme: active_meme}
       conn
@@ -55,7 +64,7 @@ defmodule Project2Web.MemeController do
         is_user_created: false
       }
 
-      {:ok, _} = Repo.insert!(meme)
+      {:ok, _} = Repo.insert(meme)
 
       active_meme = %ActiveMeme{
         is_user_created: false,
@@ -64,7 +73,16 @@ defmodule Project2Web.MemeController do
         gif_id: params["gif_id"]
       }
 
-      {:ok, _} = Repo.insert!(active_meme)
+      {:ok, active_meme} = Repo.insert(active_meme)
+
+      active_meme = %{
+        id: active_meme.id,
+        lat: active_meme.lat,
+        long: active_meme.long,
+        meme_id: active_meme.meme_id,
+        gif_id: active_meme.gif_id,
+        is_user_created: active_meme.is_user_created,
+      }
 
       resp = %{new_active_meme: active_meme}
       conn
