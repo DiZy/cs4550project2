@@ -14,12 +14,11 @@ defmodule Project2Web.MemeFoundController do
     |> send_resp(:created, Poison.encode!(%{memes: memes}))
   end
 
-  def create(conn, %{"meme_found" => meme_found_params}) do
-    with {:ok, %MemeFound{} = meme_found} <- MemesFound.create_meme_found(meme_found_params) do
+  def create(conn, payload) do
+    with {:ok, %MemeFound{} = meme_found} <- MemesFound.create_meme_found(payload) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.meme_found_path(conn, :show, meme_found))
-      |> render("show.json", meme_found: meme_found)
+      |> put_resp_header("content-type", "application/json; charset=utf-8")
+      |> send_resp(:created, %{meme_found: meme_found})
     end
   end
 
