@@ -10,7 +10,8 @@ const mapStateToProps = state => Object.assign({}, state.createMemeForm, {positi
 
 const mapDispatchToProps = (dispatch) => ({
     updateForm: (formData) => dispatch({type: 'UPDATE_CREATE_MEME_FORM', data: formData}),
-    clearForm: () => dispatch({type: "CLEAR_CREATE_MEME_FORM"})
+    clearForm: () => dispatch({type: "CLEAR_CREATE_MEME_FORM"}),
+    closeModal: () => dispatch({type: "UPDATE_MODAL_STATE", data: {createMemeModal: false}})
 });
 
 class CreateMemeModal extends React.Component {
@@ -23,6 +24,7 @@ class CreateMemeModal extends React.Component {
         this.selectTemplateForCreate = this.selectTemplateForCreate.bind(this);
         this.submitMeme = this.submitMeme.bind(this);
         this.selectGif = this.selectGif.bind(this);
+        this.clearGiphySelection = this.clearGiphySelection.bind(this);
     }
 
     updateField(fieldName) {
@@ -60,13 +62,18 @@ class CreateMemeModal extends React.Component {
         }
     }
 
-    selectGif() {
-        return (gifId, gifUrl) => {
+    selectGif(gifId, gifUrl) {
+        return (e) => {
+            e.preventDefault();
             this.props.updateForm({gifId: gifId, gifUrl: gifUrl});
         };
     }
 
     submitMeme() {
+        if(!this.props.imageUrl && !this.props.gifId) {
+            alert("Please create or select a meme");
+            return;
+        }
         fetch(uploadMeme({
             image_url: this.props.imageUrl,
             is_user_created: this.props.isUserCreated,
@@ -79,9 +86,17 @@ class CreateMemeModal extends React.Component {
         .then(resp => resp.json())
         .then(_json => {
             this.props.clearForm();
+            this.props.closeModal();
         }).catch(err => {
             alert("Failed to upload meme. Please try again.");
             console.log(err);
+        });
+    }
+
+    clearGiphySelection() {
+        this.props.updateForm({
+            gifId: "",
+            gifUrl: "",
         });
     }
     
@@ -105,11 +120,12 @@ class CreateMemeModal extends React.Component {
         });
 
         const giphys = this.props.gifsAvailable.map(gif =>
-            <img src={gif.embed_url} onClick={this.selectGif(gif.id, gif.embed_url)} />
+            <img src={gif.images.original.url} onClick={this.selectGif(gif.id, gif.images.original.url)} key={gif.id}/>
         );
 
 
         return <div className="createMemeForm">
+            <div className="modalCloseButton" onClick={this.props.closeModal}>X</div>
             {tabHeader}
             {this.props.isUserCreated &&
                 <div>
@@ -152,9 +168,12 @@ class CreateMemeModal extends React.Component {
                     {this.props.gifId && <div>
                         <p>Selected Meme:</p>
 
-                        <img src={this.props.gifUrl} />
+                        <MemeViewer gifUrl={this.props.gifUrl} />
                         
                         <p>Is this ok?</p>
+                        <button onClick={this.submitMeme}>Submit</button>
+                        <br />
+                        <button onClick={this.clearGiphySelection}>Cancel</button>
                     </div>}
                 </div>
             }

@@ -62,7 +62,7 @@ defmodule Project2.ActiveMemes do
         lat: from_db.lat,
         long: from_db.long,
         gif_id: from_db.gif_id,
-        url: from_api["embed_url"]
+        url: from_api["images"]["original"]["url"]
       }
     end
 
