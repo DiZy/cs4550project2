@@ -10,6 +10,7 @@ import { getNearbyMemes, getMyMemes, collectMeme } from '../../api';
 
 import globalStrings from '../../strings';
 import store from '../../store';
+import socket from '../../socket';
 
 const strings = globalStrings.en.welcome;
 const mapStateToProps = state => Object.assign({memes: [...state.memes], myMemes: [...state.myMemes], userId: state.userId}, state.position, state.modals );
@@ -146,6 +147,7 @@ class MemeMarkerClass extends Component {
 const MemeMarker = connect(mapMarkerToProps, mapDispatchToMarker)(MemeMarkerClass);
 
 class Dashboard extends Component {
+
   getAndTrackLocation() {
     if (this.props.longitude) {
       this.isTracking = true;
@@ -193,6 +195,24 @@ class Dashboard extends Component {
 
   componentDidMount() {
     console.log(this.props.memes);
+
+    
+    socket.connect()
+    let channel = socket.channel("memes");
+    
+    channel.on("memeadded", (resp) => {
+      console.log("Socket: Meme was added by someone");
+      let meme = resp.new_active_meme;
+      console.log(meme);
+      if(meme.user_id == this.props.userId) {
+        // TODO: add to my memes
+      }
+      this.props.addMemes([resp.new_active_meme]);
+    });
+
+    channel.join()
+      .receive("ok", _resp => {console.log("Joined channel");})
+      .receive("error", resp => { console.log("Unable to join", resp); });
 
     this.getAndTrackLocation();
     this.getNearbyMemes();

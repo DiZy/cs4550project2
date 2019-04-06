@@ -51,7 +51,10 @@ defmodule Project2Web.MemeController do
         meme_id: active_meme.meme_id,
         gif_id: active_meme.gif_id,
         is_user_created: active_meme.is_user_created,
+        user_id: user_id,
       }
+
+      Project2Web.Endpoint.broadcast!("memes", "memeadded", %{new_active_meme: active_meme})
 
       resp = %{new_active_meme: active_meme}
       conn
@@ -82,7 +85,10 @@ defmodule Project2Web.MemeController do
         meme_id: active_meme.meme_id,
         gif_id: active_meme.gif_id,
         is_user_created: active_meme.is_user_created,
+        user_id: user_id,
       }
+
+      Project2Web.Endpoint.broadcast!("memes", "memeadded", %{new_active_meme: active_meme})
 
       resp = %{new_active_meme: active_meme}
       conn

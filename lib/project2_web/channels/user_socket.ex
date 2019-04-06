@@ -2,7 +2,7 @@ defmodule Project2Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Project2Web.RoomChannel
+  channel "memes", Project2Web.MemeChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
