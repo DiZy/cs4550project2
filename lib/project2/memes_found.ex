@@ -25,7 +25,7 @@ defmodule Project2.MemesFound do
   def memes_for_user(user_id) do
     user_created_query = from mf in MemeFound, 
       join: m in UserCreatedMeme,
-      where: mf.user_id == ^user_id and mf.is_used_created == true and mf.meme_id == m.id,
+      where: mf.user_id == ^user_id and mf.is_user_created == true and mf.meme_id == m.id,
       select: %{meme: mf, data: m}
 
     user_created = Repo.all(user_created_query)
@@ -42,7 +42,7 @@ defmodule Project2.MemesFound do
 
     from_api_query = from mf in MemeFound,
       join: m in UserCreatedMeme,
-      where: mf.user_id == ^user_id and mf.is_used_created == false
+      where: mf.user_id == ^user_id and mf.is_user_created == false
 
     from_api = Repo.all(from_api_query)
 

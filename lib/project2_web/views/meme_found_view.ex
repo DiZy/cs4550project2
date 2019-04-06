@@ -13,6 +13,6 @@ defmodule Project2Web.MemeFoundView do
   def render("meme_found.json", %{meme_found: meme_found}) do
     %{id: meme_found.id,
       meme_id: meme_found.meme_id,
-      is_used_created: meme_found.is_used_created}
+      is_user_created: meme_found.is_user_created}
   end
 end

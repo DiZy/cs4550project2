@@ -14,7 +14,7 @@ defmodule Project2.MemesFound.MemeFound do
   @doc false
   def changeset(meme_found, attrs) do
     meme_found
-    |> cast(attrs, [:meme_id, :is_used_created, :gif_id])
-    |> validate_required([:meme_id, :is_used_created, :gif_id])
+    |> cast(attrs, [:meme_id, :is_user_created, :gif_id])
+    |> validate_required([:meme_id, :is_user_created, :gif_id])
   end
 end

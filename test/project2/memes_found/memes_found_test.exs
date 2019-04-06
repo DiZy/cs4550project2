@@ -6,9 +6,9 @@ defmodule Project2.MemesFoundTest do
   describe "memesfound" do
     alias Project2.MemesFound.MemeFound
 
-    @valid_attrs %{is_used_created: true, meme_id: 42}
-    @update_attrs %{is_used_created: false, meme_id: 43}
-    @invalid_attrs %{is_used_created: nil, meme_id: nil}
+    @valid_attrs %{is_user_created: true, meme_id: 42}
+    @update_attrs %{is_user_created: false, meme_id: 43}
+    @invalid_attrs %{is_user_created: nil, meme_id: nil}
 
     def meme_found_fixture(attrs \\ %{}) do
       {:ok, meme_found} =
@@ -31,7 +31,7 @@ defmodule Project2.MemesFoundTest do
 
     test "create_meme_found/1 with valid data creates a meme_found" do
       assert {:ok, %MemeFound{} = meme_found} = MemesFound.create_meme_found(@valid_attrs)
-      assert meme_found.is_used_created == true
+      assert meme_found.is_user_created == true
       assert meme_found.meme_id == 42
     end
 
@@ -42,7 +42,7 @@ defmodule Project2.MemesFoundTest do
     test "update_meme_found/2 with valid data updates the meme_found" do
       meme_found = meme_found_fixture()
       assert {:ok, %MemeFound{} = meme_found} = MemesFound.update_meme_found(meme_found, @update_attrs)
-      assert meme_found.is_used_created == false
+      assert meme_found.is_user_created == false
       assert meme_found.meme_id == 43
     end
 
