@@ -62,7 +62,17 @@ const PlayerMarker = (props) => (
   </div>
 );
 
-const mapMarkerToProps = (state) => Object.assign({}, {userId: state.userId});
+const mapDispatchToMarker = (dispatch) => ({
+  addMyMemes: (meme) => dispatch({
+    type: 'ADD_MY_MEMES',
+    data: [meme]
+  })
+});
+
+const mapMarkerToProps = (state) => Object.assign({}, 
+  {myMemes: [...state.myMemes]},
+  {userId: state.userId}
+);
 
 class MemeMarkerClass extends Component {
   constructor() {
@@ -77,21 +87,26 @@ class MemeMarkerClass extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.clicked == false && this.state.clicked == true) {
-      console.log({
-        is_user_created: this.props.is_user_created,
-        user_id: this.props.userId,
-        meme_id: this.props.meme_id,
-        gif_id: this.props.gif_id
-      });
-      fetch(collectMeme({
-        is_user_created: this.props.is_user_created,
-        user_id: this.props.userId,
-        meme_id: this.props.meme_id,
-        gif_id: this.props.gif_id
-      }))
      setTimeout(() => {
-        //this.setState({collected: true})
-        
+        this.setState({collected: true})
+        fetch(collectMeme({
+          is_user_created: this.props.is_user_created,
+          user_id: this.props.userId,
+          meme_id: this.props.meme_id,
+          gif_id: this.props.gif_id
+        })).then(res => {
+          this.props.addMyMemes({
+            meme_id: this.props.meme_id,
+            gif_id: this.props.gif_id,
+            is_user_created: this.props.is_user_created,
+            url: this.props.url,
+            lat: this.props.lat,
+            long: this.props.lng,
+            image_url: this.props.image_url,
+            text_line_one: this.props.text_line_one,
+            text_line_two: this.props.text_line_two,
+          })
+        })
       }, 1000)
     }
   }
@@ -128,7 +143,7 @@ class MemeMarkerClass extends Component {
   }
 }
 
-const MemeMarker = connect(mapMarkerToProps)(MemeMarkerClass);
+const MemeMarker = connect(mapMarkerToProps, mapDispatchToMarker)(MemeMarkerClass);
 
 class Dashboard extends Component {
   getAndTrackLocation() {
