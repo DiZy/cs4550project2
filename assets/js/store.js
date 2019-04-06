@@ -72,6 +72,22 @@ const token = (state = initToken, action) =>{
   }
 }
 
+let initUserId = null;
+if (window.userId) {
+  initUserId = window.userId
+}
+
+const userId = (state = initUserId, action) =>{
+  switch (action.type) {
+    case 'SET_USER_ID':
+      return action.id;
+    case 'CLEAR_USER_ID':
+      return null;
+    default:
+      return state;
+  }
+}
+
 const register = (state = {email: "",name: "",password: ""}, action) => {
   switch (action.type) {
     case 'INIT_FORM':
@@ -126,7 +142,7 @@ const createMemeForm = (state = createMemeFormDefaultState, action) => {
 };
 
 const reducers = (state, action) => {
-  let reducer = combineReducers({form, token, login, register, position, modals, memes, createMemeForm});
+  let reducer = combineReducers({form, token, login, userId, register, position, modals, memes, createMemeForm});
   return deepFreeze(reducer(state, action));
 };
 

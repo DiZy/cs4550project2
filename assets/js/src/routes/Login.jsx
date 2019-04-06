@@ -20,7 +20,11 @@ const mapDispatchToProps = (dispatch, { history }) => ({
       .then(json => {
         dispatch({
           type: 'SET_TOKEN',
-          token: json
+          token: json.data.user_token
+        })
+        dispatch({
+          type: 'SET_USER_ID',
+          id: json.data.user_id
         })
         history.push('/');
       }).catch(err => {

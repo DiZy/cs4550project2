@@ -6,13 +6,13 @@ import GoogleMapReact from 'google-map-react';
 import Modal from 'react-modal';
 import CreateMemeModal from "../components/CreateMemeModal";
 import MemeViewer from "../components/MemeViewer";
-import { getNearbyMemes } from '../../api';
+import { getNearbyMemes, collectMeme } from '../../api';
 
 import globalStrings from '../../strings';
 import store from '../../store';
 
 const strings = globalStrings.en.welcome;
-const mapStateToProps = state => Object.assign({memes: [...state.memes]}, state.position, state.modals, );
+const mapStateToProps = state => Object.assign({memes: [...state.memes]}, state.position, state.modals );
 
 const mapOptions = {
   styles: [{"featureType":"all","elementType":"geometry","stylers":[{"color":"#c1fcb8"},{"weight":"1.00"}]},{"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"gamma":0.01},{"lightness":20}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"saturation":-31},{"lightness":-33},{"weight":2},{"gamma":0.8}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"hue":"#ff0000"},{"visibility":"off"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"all","stylers":[{"color":"#e0ffd3"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"saturation":20}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"lightness":20},{"saturation":-20}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#41ff82"}]},{"featureType":"road","elementType":"all","stylers":[{"weight":"2.00"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":"-20"},{"saturation":"-67"},{"gamma":"1.32"},{"color":"#57aa9f"},{"weight":"2.00"},{"visibility":"simplified"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"weight":"2.00"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"saturation":25},{"lightness":25},{"weight":"1.00"},{"color":"#f1ff8a"},{"visibility":"on"}]},{"featureType":"road","elementType":"labels","stylers":[{"weight":"2.12"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#4c98a8"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#4c98a8"},{"weight":"2.63"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#f1ff8a"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.station","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"lightness":-20},{"color":"#1b89d9"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#1b87d9"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"off"}]}],
@@ -58,7 +58,9 @@ const PlayerMarker = (props) => (
   </div>
 );
 
-class MemeMarker extends Component {
+const mapMarkerToProps = (state) => Object.assign({}, {userId: state.userId});
+
+class MemeMarkerClass extends Component {
   constructor() {
     super();
     this.state = {
@@ -71,9 +73,22 @@ class MemeMarker extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.clicked == false && this.state.clicked == true) {
+      console.log({
+        is_user_created: this.props.is_user_created,
+        user_id: this.props.userId,
+        meme_id: this.props.meme_id,
+        gif_id: this.props.gif_id
+      });
+      fetch(collectMeme({
+        is_user_created: this.props.is_user_created,
+        user_id: this.props.userId,
+        meme_id: this.props.meme_id,
+        gif_id: this.props.gif_id
+      }))
      setTimeout(() => {
         //this.setState({collected: true})
-      }, 3000)
+        
+      }, 1000)
     }
   }
 
@@ -108,6 +123,8 @@ class MemeMarker extends Component {
     )
   }
 }
+
+const MemeMarker = connect(mapMarkerToProps)(MemeMarkerClass);
 
 class Dashboard extends Component {
   getAndTrackLocation() {
@@ -165,6 +182,7 @@ class Dashboard extends Component {
         text_line_one={meme.text_line_one}
         text_line_two={meme.text_line_two}
         gif_id={meme.gif_id}
+        meme_id={meme.meme_id}
         url={meme.url}
       />
     ))
