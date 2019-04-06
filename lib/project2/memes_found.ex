@@ -32,8 +32,6 @@ defmodule Project2.MemesFound do
 
     user_created = Enum.map(user_created, fn m -> %{
       is_user_created: true,
-      lat: m.meme.lat,
-      long: m.meme.long,
       meme_id: m.data.id,
       image_url: m.data.image_url,
       text_line_one: m.data.text_line_one,
@@ -63,8 +61,6 @@ defmodule Project2.MemesFound do
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
       %{
         is_user_created: false,
-        lat: from_db.lat,
-        long: from_db.long,
         gif_id: from_db.gif_id,
         gif_url: from_api["images"]["original"]["url"]
       }
