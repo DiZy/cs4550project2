@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import Modal from 'react-modal';
 import CreateMemeModal from "../components/CreateMemeModal";
-
+import MemeViewer from "../components/MemeViewer";
 import { getNearbyMemes } from '../../api';
 
 import globalStrings from '../../strings';
@@ -72,7 +72,7 @@ class MemeMarker extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.clicked == false && this.state.clicked == true) {
      setTimeout(() => {
-        this.setState({collected: true})
+        //this.setState({collected: true})
       }, 3000)
     }
   }
@@ -96,7 +96,14 @@ class MemeMarker extends Component {
         onClick={this.handleClick}
       >
         <img className="meme-marker" src="https://image.flaticon.com/icons/svg/214/214305.svg" />
-        {this.state.clicked && !this.state.collected ? 'WHAT IS POPPIN' : null}
+        {this.state.clicked && !this.state.collected ? (
+          <MemeViewer 
+            imageUrl={this.props.image_url}
+            gifUrl={this.props.url}
+            textLineOne={this.props.text_line_one}
+            textLineTwo={this.props.text_line_two} 
+          />
+        ) : null}
       </div>
     )
   }
@@ -149,7 +156,18 @@ class Dashboard extends Component {
   renderMemeMarkers() {
     console.log(this.props.memes);
 
-    return this.props.memes.map(meme => <MemeMarker lat={meme.lat} lng={meme.long} />)
+    return this.props.memes.map(meme => (
+      <MemeMarker 
+        lat={meme.lat} 
+        lng={meme.long}
+        image_url={meme.image_url}
+        is_user_created={meme.is_user_created}
+        text_line_one={meme.text_line_one}
+        text_line_two={meme.text_line_two}
+        gif_id={meme.gif_id}
+        url={meme.url}
+      />
+    ))
   }
 
   renderMap() {
