@@ -66,7 +66,7 @@ defmodule Project2.MemesFound do
         lat: from_db.lat,
         long: from_db.long,
         gif_id: from_db.gif_id,
-        gif_url: from_api["embed_url"]
+        gif_url: from_api["images"]["original"]["url"]
       }
     end
 

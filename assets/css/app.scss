@@ -930,9 +930,16 @@ footer {
 
   .giphy-memes {
     img {
-      width: 50px;
+      width: 200px;
       padding: 5px;
     }
   }
+}
+
+.modalCloseButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-weight: bold;
 }
 
