@@ -205,7 +205,13 @@ class Dashboard extends Component {
       let meme = resp.new_active_meme;
       console.log(meme);
       if(meme.user_id == this.props.userId) {
-        // TODO: add to my memes
+        console.log("Adding to my memes");
+        this.props.addMyMemes([{
+          is_user_created: meme.is_user_created,
+          gif_id: meme.gif_id,
+          meme_id: meme.meme_id,
+          user_id: meme.user_id,
+        }]);
       }
       this.props.addMemes([resp.new_active_meme]);
     });
