@@ -1,6 +1,7 @@
 defmodule Project2Web.MemeFoundController do
   use Project2Web, :controller
 
+  alias Project2.Repo
   alias Project2.MemesFound
   alias Project2.MemesFound.MemeFound
 
@@ -15,11 +16,17 @@ defmodule Project2Web.MemeFoundController do
   end
 
   def create(conn, payload) do
-    with {:ok, %MemeFound{} = meme_found} <- MemesFound.create_meme_found(payload) do
-      conn
-      |> put_resp_header("content-type", "application/json; charset=utf-8")
-      |> send_resp(:created, %{meme_found: meme_found})
-    end
+    meme = %MemeFound{
+      gif_id: payload["gif_id"],
+      meme_id: payload["meme_id"],
+      is_user_created: payload["is_user_created"],
+      user_id: payload["user_id"],
+    }
+    {:ok, meme_found} = Repo.insert(meme)
+
+    conn
+    |> put_resp_header("content-type", "application/json; charset=utf-8")
+    |> send_resp(:created, Poison.encode!(%{ok: true}))
   end
 
   def show(conn, %{"id" => id}) do
