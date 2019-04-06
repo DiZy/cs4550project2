@@ -114,7 +114,7 @@ class MemeMarkerClass extends Component {
         {this.state.clicked && !this.state.collected ? (
           <MemeViewer 
             imageUrl={this.props.image_url}
-            gifUrl={this.props.url}
+            gifUrl={this.props.gif_url}
             textLineOne={this.props.text_line_one}
             textLineTwo={this.props.text_line_two} 
           />
