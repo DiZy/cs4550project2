@@ -37,11 +37,16 @@ const uploadMeme = (body) => new Request("api/addmeme", Object.assign({},
   {body: JSON.stringify(body)}
 ));
 
+const getMyMemes = (body) => new Request("api/collectedmemes", Object.assign({},
+  { method: 'GET'}
+));
+
 export {
   login,
   register,
   getNearbyMemes,
   fetchGifs,
   uploadMeme,
-  collectMeme
+  collectMeme,
+  getMyMemes
 }
