@@ -8,7 +8,8 @@ defmodule Project2Web.MemeFoundController do
   action_fallback Project2Web.FallbackController
 
   # My Memes
-  def index(conn, %{"user_id" => user_id}) do
+  def index(conn, _payload) do
+    user_id = conn.assigns[:user_id]
     memes = MemesFound.memes_for_user(user_id)
     conn
     |> put_resp_header("content-type", "application/json; charset=utf-8")
