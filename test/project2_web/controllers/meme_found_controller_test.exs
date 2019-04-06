@@ -5,14 +5,14 @@ defmodule Project2Web.MemeFoundControllerTest do
   alias Project2.MemesFound.MemeFound
 
   @create_attrs %{
-    is_used_created: true,
+    is_user_created: true,
     meme_id: 42
   }
   @update_attrs %{
-    is_used_created: false,
+    is_user_created: false,
     meme_id: 43
   }
-  @invalid_attrs %{is_used_created: nil, meme_id: nil}
+  @invalid_attrs %{is_user_created: nil, meme_id: nil}
 
   def fixture(:meme_found) do
     {:ok, meme_found} = MemesFound.create_meme_found(@create_attrs)
@@ -39,7 +39,7 @@ defmodule Project2Web.MemeFoundControllerTest do
 
       assert %{
                "id" => id,
-               "is_used_created" => true,
+               "is_user_created" => true,
                "meme_id" => 42
              } = json_response(conn, 200)["data"]
     end
@@ -61,7 +61,7 @@ defmodule Project2Web.MemeFoundControllerTest do
 
       assert %{
                "id" => id,
-               "is_used_created" => false,
+               "is_user_created" => false,
                "meme_id" => 43
              } = json_response(conn, 200)["data"]
     end
