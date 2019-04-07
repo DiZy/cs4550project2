@@ -7,7 +7,7 @@ import MemeViewer from './MemeViewer';
 const mapStateToProps = state => Object.assign({}, {myMemes: state.myMemes});
 
 const mapDispatchToProps = (dispatch) => ({
-    closeModal: () => dispatch({type: "UPDATE_MODAL_STATE", data: {createMemeModal: false}})
+    closeModal: () => dispatch({type: "UPDATE_MODAL_STATE", data: {profileModal: false}})
 });
 
 class CollectedMemesModal extends React.Component {
