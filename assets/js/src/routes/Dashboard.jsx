@@ -247,6 +247,7 @@ class Dashboard extends Component {
         text_line_one={meme.text_line_one}
         text_line_two={meme.text_line_two}
         gif_id={meme.gif_id}
+        gif_url={meme.gif_url}
         meme_id={meme.meme_id}
         url={meme.url}
       />
