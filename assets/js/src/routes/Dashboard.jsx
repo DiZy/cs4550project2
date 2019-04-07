@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import Modal from 'react-modal';
 import CreateMemeModal from "../components/CreateMemeModal";
+import CollectedMemesModal from "../components/CollectedMemesModal";
 import MemeViewer from "../components/MemeViewer";
 import { getNearbyMemes, getMyMemes, collectMeme } from '../../api';
 
@@ -177,7 +178,11 @@ class Dashboard extends Component {
     
     fetch(getMyMemes())
       .then(res => res.json())
-      .then(json => this.props.addMyMemes(json.memes))
+      .then(json => {
+        console.log("fetched my memes");
+        console.log(json);
+        this.props.addMyMemes(json.memes)
+      })
       .catch(err => console.log(err));
   }
 
@@ -264,7 +269,9 @@ class Dashboard extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           contentLabel="Profile Modal"
-        ></Modal>
+        >
+          <CollectedMemesModal />
+        </Modal>
         <div style={{height: '100vh', width: '100%'}}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: 'AIzaSyA1h6CsIIQJYIWHhWdwZLYSW0qCByzlTAs' }}
