@@ -188,7 +188,7 @@ class Dashboard extends Component {
 
   filterMemes() {
     const {myMemes, memes} = this.props;
-    const myMemesGifs = myMemes.map(meme => meme.gif_url).filter(meme => meme);
+    const myMemesGifs = myMemes.map(meme => meme.gif_id).filter(meme => meme);
     const myMemesCreated = myMemes.map(meme => meme.meme_id).filter(meme => meme);
 
     const filteredMemes = memes.filter(meme => {
