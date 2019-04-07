@@ -112,6 +112,7 @@ class MemeMarkerClass extends Component {
           this.props.addMyMemes({
             meme_id: this.props.meme_id,
             gif_id: this.props.gif_id,
+            gif_url: this.props.gif_url,
             is_user_created: this.props.is_user_created,
             url: this.props.url,
             lat: this.props.lat,

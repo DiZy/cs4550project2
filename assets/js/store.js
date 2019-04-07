@@ -49,8 +49,6 @@ const form = (state = INIT_FORM, action) => {
         user_id: action.token.user_id
       }
       return Object.assign({}, state, session);
-    case 'CLEAR_TOKEN':
-      return {email: "",pass: ""};
     default:
       return state;
   }
@@ -61,12 +59,12 @@ if (window.userToken) {
   initToken = window.userToken
 }
 
-const token = (state = initToken, action) =>{
+const token = (state = initToken, action) => {
   switch (action.type) {
     case 'SET_TOKEN':
       return action.token;
     case 'CLEAR_TOKEN':
-      return null;
+      return false;
     default:
       return state;
   }
@@ -101,8 +99,6 @@ const register = (state = {email: "",name: "",password: ""}, action) => {
 
 const login = (state = {email: "",pass: ""}, action) => {
   switch (action.type) {
-    case 'CLEAR_TOKEN':
-      return {email: "",pass: ""};
     case 'UPDATE_LOGIN_FORM':
       return Object.assign({}, state, action.data);
     default:
