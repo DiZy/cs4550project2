@@ -64,6 +64,20 @@ main {
   background: linear-gradient(135deg, #7956ec 0%, #2fb9f8 100%);
 }
 
+.dashboard {
+  &__msg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 2rem;
+    z-index: 999999;
+  }
+}
 .welcome {
   color: white;
   position: relative;
@@ -215,9 +229,8 @@ main {
     border-radius: 50px;
     height: 100px;
     border: 2px solid white;
+    cursor: pointer;
   }
-
-
 
   &__create-meme {
     width: 170px;
@@ -235,6 +248,7 @@ main {
     position: absolute;
     right: 15px;
     top: 0;
+    cursor: pointer;
   }
 
   &__create-img {
@@ -243,6 +257,7 @@ main {
   }
 
   &__logout {
+    cursor: pointer;
     position: absolute;
     right: 15px;
     top: -65px;
@@ -294,6 +309,7 @@ main {
   height: 30px;
   position: relative;
   z-index: 10000;
+  cursor: pointer;
 }
 
 footer {
@@ -334,445 +350,6 @@ footer {
   border-color: $accent !important; 
 }
 
-.taskify-status {
-  color: #ffffff;
-  background-color: #15b6be;
-  border-color: #15b6be;
-  padding: 0.75rem 1.25rem;
-  margin: 10px auto;
-  border-radius: 5px;
-}
-
-.text-pop {
-  color: $accent;
-  font-weight: 700;
-}
-
-.app-header {
-  background-color: white;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 10px;
-  display: flex;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-
-  &--active {
-    color: $dark-accent;
-  }
-
-  &__title {
-    font-size: 2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: $accent;
-    padding-left: 15px;
-  }
-
-  &__links {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-  }
-
-  &__links > p, &__links > a {
-    padding: 0 5px;
-    margin: 0;
-  }
-}
-
-.manage {
-  background-color: white;
-  border-radius: 10px;
-  padding: 25px 35px;
-  margin-top: 50px;
-
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    border-bottom: 2px solid #e6e6e6;
-    padding-bottom: 5px;
-  }
-
-  &__list {
-    columns: 1;
-    margin: 0;
-    padding: 0;
-  }
-
-  &__list-entry {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-bottom: 20px;
-    border-left: 3px solid $gray-dark;
-    padding: 0 10px;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      background-color: $gray-dark;
-      color: white;
-    }
-  }
-
-  &__list-entry > p {
-    margin: 0;
-  }
-
-  &__action {
-    margin-left: auto;
-    min-width: 108px;
-  }
-
-
-}
-
-.profile {
-  background-color: white;
-  border-radius: 10px;
-  padding: 25px 35px;
-  margin-top: 50px;
-
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    border-bottom: 2px solid #e6e6e6;
-    padding-bottom: 5px;
-  }
-
-  &__manager {
-    display: flex;
-  }
-
-  &__manager-copy {
-    font-weight: 800;
-  }
-
-  &__manager-content {
-    margin-left: 10px;
-  }
-
-  &__employees-copy {
-    font-weight: 800;
-  }
-}
-
-.task-indiv {
-  &__info {
-    display: flex;
-    padding-bottom: 5px;
-    border-bottom: 2px solid $gray;
-  }
-
-  &__header {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  &__description {
-    color: $gray-dark;
-    font-size: 1.2rem;
-    margin-top: 10px;
-    display: block;
-  }
-
-  &__links {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 15px;
-
-    > span {
-      margin: 0 auto 0 0;
-    }
-
-    a {
-      @extend .btn;
-      @extend .btn-primary;
-      
-      width: 60px;
-      font-weight: 600;
-      margin-left: 10px;
-    }
-  }
-
-}
-
-.task-new {
-  &__select {
-    display: flex;
-    align-items: center;
-  }
-
-  &__select-label {
-    margin: 0 20px 0 0;
-    font-weight: 600;
-    font-size: 1.3rem;
-  }
-
-  &__select-input {
-    flex-basis: 30%;
-    background-color: $accent;
-    color: white;
-    padding: 5px;
-    font-size: 1.3rem;
-  }
-
-  &__input {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px 10px;
-    border-radius: 4px;
-    border: 2px solid $gray;
-    font-size: 1.3rem;
-  }
-
-  &__txtbox {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px 10px;
-    border-radius: 4px;
-    border: 2px solid $gray;
-    font-size: 1rem;
-    min-height: 250px;
-  }
-
-  &__last-row {
-    display: flex;
-    align-items: center;
-
-    > p {
-      font-weight: 600;
-      font-size: 1.3rem;
-      margin: 0;
-    }
-  }
-
-  &__complete {
-    zoom: 1.5;
-    transform: scale(1.5);
-    margin-left: 10px;
-    margin-top: 2px;
-  }
-
-  &__minutes {
-    margin-left: auto !important;
-  }
-
-  &__increment {
-    border-radius: 4px;
-    border: 2px solid $gray;
-    font-size: 1.3rem;
-    width: 50px;
-    margin-left: 10px;
-    background-color: $accent;
-    color: white;
-  }
-
-  &__submit {
-    display: block;
-    width: 100%;
-    margin: 20px auto;
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-
-  &__return {
-    display: block;
-    margin: 10px 15px;
-  }
-}
-
-.task-list {
-  background-color: white;
-  border-radius: 10px;
-  padding: 25px 35px;
-  margin-top: 50px;
-  position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-
-  &__section-header {
-    font-size: 2.5rem;
-    color: $accent;
-    border: none;
-    text-transform: uppercase;
-    font-weight: 800;
-  }
-
-  &__tooltip {
-    display: table;
-  }
-
-  &__header {
-    font-size: 1.5rem;
-    font-weight: 700;
-    border-bottom: 2px solid $gray;
-    padding-bottom: 5px;
-  }
-
-  &__add {
-    font-size: 3.7rem;
-    background-color: #15aeb6;
-    border-radius: 45px;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    color: white;
-    align-items: center;
-    position: absolute;
-    right: -15px;
-    top: -15px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-
-    &:hover {
-      background-color: white;
-      color: $accent;
-      border: 1px solid $accent;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-  }
-
-  &__container {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  &__entry {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-
-  &__info {
-    display: flex;
-    flex-basis: 100%;
-  }
-
-  &__title {
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-
-  &__up-right {
-    margin-left: auto;
-    display: flex;
-  }
-
-  &__time {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    margin-right: 25px;
-    margin-bottom: 2px;
-
-    &::before {
-      display: block;
-      content: ' ';
-      background-image: url('../images/clock.svg');
-      height: 15px;
-      width: 15px;
-      margin-right: 3px;
-      margin-top: 2px;
-    }
-  }
-
-  &__status {
-    display: flex;
-    align-items: center;
-    color: $accent;
-    margin-bottom: 2px;
-    border: 1px dashed teal;
-    padding: 1px 5px;
-    border-radius: 1px;
-  }
-
-  &__description {
-    color: $gray-dark;
-    flex-basis: 100%;
-  }
-
-  &__owner {
-    display: flex;
-    align-items: baseline;
-    margin-top: 15px;
-
-    &::before {
-      display: block;
-      content: ' ';
-      background-image: url('../images/user.svg');
-      background-size: 20px 20px;
-      height: 20px;
-      width: 20px;
-      margin-right: 5px;
-    }
-  }
-
-  &__view {
-    margin-top: 15px;
-    font-weight: 600;
-  }
-
-  &__edit {
-    font-weight: 600;
-  }
-
-  &__del {
-    color: $red;
-  }
-
-  &__buttons {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-
-    > a {
-      margin-left: 15px;
-      margin-top: 15px;
-      font-weight: 600;
-    }
-  }
-
-  &__timer {
-    border-radius: 5px;
-    color: white !important;
-    background-color: $accent;
-    padding: 5px 15px;
-
-    &:hover {
-    }
-  }
-}
-
-.time-log {
-  background-color: white;
-  border-radius: 10px;
-  padding: 25px 35px;
-  margin-top: 50px;
-  position: relative;
-
-  &__header {
-    font-size: 1.5rem;
-    font-weight: 700;
-    border-bottom: 2px solid $gray;
-    padding-bottom: 5px;
-  }
-
-  &__table {
-    width: 100%;
-  }
-
-  &__delete {
-    color: $red !important;
-    font-weight: 800;
-  }
-
-  &__edit {
-    font-weight: 800;
-    margin-right: 10px;
-  }
-}
 
 .login {
   &__copy {
@@ -906,6 +483,7 @@ footer {
   height: 200px;
   width: 200px;
   position: relative;
+  z-index: 99999;
 
   img {
     width: 100%;

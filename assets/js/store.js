@@ -128,6 +128,15 @@ const myMemes = (state = [], action) => {
   }
 }
 
+const memeCollected = (state = false, action) => {
+  switch (action.type) {
+    case 'MEME_COLLECTED':
+      return !state;
+    default: 
+      return state;
+  }
+}
+
 const createMemeFormDefaultState = {
   isUserCreated: true, 
   textLineOne: "", 
@@ -151,7 +160,8 @@ const createMemeForm = (state = createMemeFormDefaultState, action) => {
 };
 
 const reducers = (state, action) => {
-  let reducer = combineReducers({form, token, login, userId, register, position, modals, memes, myMemes, createMemeForm});
+  let reducer = combineReducers({form, token, login, userId, memeCollected, 
+    register, position, modals, memes, myMemes, createMemeForm});
   return deepFreeze(reducer(state, action));
 };
 
