@@ -112,4 +112,24 @@ defmodule Project2Web.MemeController do
     |> put_resp_header("content-type", "application/json; charset=utf-8")
     |> send_resp(:created, resp.body)
   end
+
+  def collectmeme(conn, params) do
+
+    user_id = conn.assigns[:user_id]
+
+    _ = IO.puts(params["gif_id"])
+
+    meme = %MemeFound{
+      gif_id: params["gif_id"],
+      meme_id: params["meme_id"],
+      is_user_created: params["is_user_created"],
+      user_id: user_id,
+    }
+    
+    {:ok, meme_found} = Repo.insert(meme)
+
+    conn
+    |> put_resp_header("content-type", "application/json; charset=utf-8")
+    |> send_resp(:created, Poison.encode!(%{ok: true}))
+  end
 end

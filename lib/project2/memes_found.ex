@@ -56,7 +56,7 @@ defmodule Project2.MemesFound do
 
     resp = HTTPoison.get!(url, headers, params: params)
 
-    meme_data = Jason.decode!(resp.body)
+    meme_data = Jason.decode!(resp.body)["data"]
 
     memes = for {from_db, from_api} <- Enum.zip(from_api, meme_data) do
       %{

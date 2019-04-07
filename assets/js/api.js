@@ -28,7 +28,7 @@ const fetchGifs = () => new Request("/api/getgifs", Object.assign({},
 ));
 
 const collectMeme = (body) => new Request("api/collectmeme", Object.assign({},
-  { method: 'POST' },
+  config,
   {body: JSON.stringify(body)}
 ));
 
