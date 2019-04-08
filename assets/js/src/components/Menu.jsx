@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import globalStrings from '../../strings';
+import { logOut } from '../../api';
 
 const strings = globalStrings.en.menu;
 
@@ -9,7 +10,7 @@ const mapStateToProps = state => Object.assign({}, state.modals);
 const mapDispatchToProps = dispatch => ({
   openMemeModal: e => dispatch({type: 'UPDATE_MODAL_STATE', data: {createMemeModal: true}}),
   openProfileModal: e => dispatch({type: 'UPDATE_MODAL_STATE', data: {profileModal: true}}),
-  onLogOut: e => {console.log('cucu'); dispatch({type: 'CLEAR_TOKEN'})}
+  onLogOut: e => {fetch(logOut(window.userId)); dispatch({type: 'CLEAR_TOKEN'})}
 });
 
 const Menu = ({onLogOut, openMemeModal, openProfileModal}) => (

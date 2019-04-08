@@ -41,7 +41,15 @@ const getMyMemes = (body) => new Request("api/collectedmemes", Object.assign({},
   { method: 'GET'}
 ));
 
+const logOut = (id) => new Request(`api/auth/${id}`, Object.assign({},
+  config,
+  {
+    method: 'DELETE'
+  }
+));
+
 export {
+  logOut,
   login,
   register,
   getNearbyMemes,
