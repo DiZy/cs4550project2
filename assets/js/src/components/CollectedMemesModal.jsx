@@ -18,7 +18,7 @@ class CollectedMemesModal extends React.Component {
     
     render() {
         const memes = this.props.myMemes.map((meme) => {
-            return (<div>
+            return (<div className="collected-meme-form-entry">
                 <MemeViewer 
                     gifUrl={meme.gif_url}
                     imageUrl={meme.image_url}
@@ -29,8 +29,10 @@ class CollectedMemesModal extends React.Component {
     
         return <div className="collected-meme-form">
             <div className="modalCloseButton" onClick={this.props.closeModal}>X</div>
-            <p>Collected Memes:</p>
-            {memes}
+            <p className="collected-meme-form-title">Collected Memes</p>
+            <div className="collected-meme-form-meme-container">
+                {memes}
+            </div>
         </div>;
     }
 }
