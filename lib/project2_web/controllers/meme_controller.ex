@@ -54,6 +54,7 @@ defmodule Project2Web.MemeController do
         user_id: user_id,
         text_line_one: params["text_line_one"],
         text_line_two: params["text_line_two"],
+        gif_url: params["gif_url"],
       }
 
       Project2Web.Endpoint.broadcast!("memes", "memeadded", %{new_active_meme: active_meme})
@@ -88,6 +89,7 @@ defmodule Project2Web.MemeController do
         gif_id: active_meme.gif_id,
         is_user_created: active_meme.is_user_created,
         user_id: user_id,
+        gif_url: params["gif_url"],
       }
 
       Project2Web.Endpoint.broadcast!("memes", "memeadded", %{new_active_meme: active_meme})

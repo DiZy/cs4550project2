@@ -82,6 +82,7 @@ class CreateMemeModal extends React.Component {
             text_line_two: this.props.textLineTwo,
             lat: this.props.position.latitude,
             long: this.props.position.longitude,
+            gif_url: this.props.gifUrl,
         }))
         .then(resp => resp.json())
         .then(_json => {
