@@ -82,6 +82,12 @@ main {
   color: white;
   position: relative;
 
+  @media only screen and (max-width: 768px) {
+    img {
+      display: none;
+    }
+  }
+  
   &__left {
     width: 55%;
   }
@@ -466,11 +472,12 @@ footer {
     width: 100%;
     overflow-y: none;
     overflow-x: scroll;
-    
+    display: flex;
+
     &-template {
       padding: 5px;
       width: 50px;
-
+      margin: 5px;
 
       img {
         height: 50px;
@@ -501,7 +508,6 @@ footer {
   }
 }
 .meme-viewer {
-  height: 200px;
   width: 200px;
   position: relative;
   z-index: 99999;

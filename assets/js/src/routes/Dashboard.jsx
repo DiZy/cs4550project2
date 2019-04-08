@@ -49,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Modal.setAppElement('#root')
 
+//https://stackoverflow.com/questions/2440377/javascript-collision-detection
 function isCollide(a, b) {
   var aRect = a.getBoundingClientRect();
   var bRect = b.getBoundingClientRect();
