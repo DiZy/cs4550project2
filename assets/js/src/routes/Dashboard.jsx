@@ -165,23 +165,25 @@ const MemeMarker = connect(mapMarkerToProps, mapDispatchToMarker)(MemeMarkerClas
 
 class Dashboard extends Component {
   getAndTrackLocation() {
-    if (this.props.longitude) {
-      this.isTracking = true;
-      navigator.geolocation.watchPosition((position) => {
-        this.props.updateLocation(position);
-      });
-    } else if (navigator.geolocation) {
-
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.props.updateLocation(position);
-
+    try {
+      if (this.props.longitude) {
         this.isTracking = true;
         navigator.geolocation.watchPosition((position) => {
           this.props.updateLocation(position);
         });
-      });
-    } else {
-      alert("Geolocation is not supported by this browser. Unfortunately Mememon go can't work properly on your machine :(");
+      } else if (navigator.geolocation) {
+  
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.props.updateLocation(position);
+  
+          this.isTracking = true;
+          navigator.geolocation.watchPosition((position) => {
+            this.props.updateLocation(position);
+          });
+        });
+      }
+    } catch(err) {
+      alert("Please try refreshing the page and accepting the location permission, there was an issue getting your location");
     }
   }
   
